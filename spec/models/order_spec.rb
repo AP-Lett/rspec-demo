@@ -20,4 +20,41 @@ RSpec.describe Order, type: :model do
     puts "Error: item_name #{order.errors[:item_name]}"
     puts "-------------------"
   end
+
+  describe 'scopes' do
+
+    describe '.cancelled' do
+      it 'returns only cancelled orders' do
+        cancelled_order = create(:order, cancelled: true)
+        active_order = create(:order, cancelled: false)
+
+        result = Order.cancelled
+        expect(result).to include(cancelled_order)
+        expect(result).not_to include(active_order)
+      end
+    end
+
+    describe '.active' do 
+      it 'returns only active orders' do
+        active_order = create(:order, cancelled: false)
+        cancelled_order = create(:order, cancelled: true)
+
+        result = Order.active
+        expect(result).to include(active_order)
+        expect(result).not_to include(cancelled_order)
+      end
+    end
+
+    describe '.sort_latest' do
+      it 'returns orders from latest to oldest' do
+        order1 = create(:order, created_at: Time.new(2025, 2, 27, 10, 0, 0))
+        order2 = create(:order, created_at: Time.new(2025, 2, 27, 9, 0, 0))
+        order3 = create(:order, created_at: Time.new(2025, 2, 27, 8, 0, 0))
+
+        orders = Order.sort_latest
+
+        expect(orders).to eq([order1, order2, order3])
+      end
+    end
+  end
 end
