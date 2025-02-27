@@ -10,4 +10,10 @@ RSpec.describe Order, type: :model do
     puts order.cancelled
     puts "-------------------"
   end
+
+  it 'expects Order to be invalid if item_name is nil' do
+    order = Order.new(item_name: nil)
+    expect(order.valid?).to be_falsey
+    #.valid? returns false if the object fails validation
+  end
 end
