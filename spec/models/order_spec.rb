@@ -57,4 +57,23 @@ RSpec.describe Order, type: :model do
       end
     end
   end
+
+  describe 'cancellable' do
+
+    describe '.cancel!' do
+      it 'changes boolean for cancelled to be true' do
+        order = create(:order, item_name: "Item 1", cancelled: false)
+        order.cancel!
+        expect(order.cancelled).to eq(true)
+      end
+    end
+
+    describe '.uncancel!' do
+      it 'changes boolean for cancelled to false' do
+        order = create(:order, item_name: "Item 1", cancelled: true)
+        order.uncancel!
+        expect(order.cancelled).to eq(false)
+      end
+    end
+  end
 end
