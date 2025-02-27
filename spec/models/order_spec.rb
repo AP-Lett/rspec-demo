@@ -15,5 +15,9 @@ RSpec.describe Order, type: :model do
     order = Order.new(item_name: nil)
     expect(order.valid?).to be_falsey
     #.valid? returns false if the object fails validation
+    #be_falsey checks if value returned by .valid? is any falsy value (false/nil)
+    puts "-------------------"
+    puts "Error: item_name #{order.errors[:item_name]}"
+    puts "-------------------"
   end
 end
