@@ -48,3 +48,8 @@ end
 
 gem 'rspec-rails'
 gem 'factory_bot_rails'
+
+gem 'bcrypt' # For hashing passwords securely
+gem 'jwt' # For generating JSON Web Tokens
+
+gem 'faker'
