@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   post '/orders' => 'orders#create'
   delete '/orders/:id' => 'orders#destroy'
   patch '/orders/:id' => 'orders#update'
+
+  post '/login' => 'sessions#create'
+  post '/users' => 'users#create'
 end
